@@ -9,10 +9,13 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 
 // Write code to use inquirer to gather information about the development team members,
+
 // and to create objects for each team member (using the correct classes as blueprints!)
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -33,3 +36,71 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+const teamMembers = [];
+
+function createManager(){
+    console.log("Please enter your Manager's info");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "managerName",
+            message: "What is your manager's name?"
+        },{
+            type: "input",
+            name: "managerId",
+            message: "What is your manager's ID number?"
+        },{
+            type: "input",
+            name: "managerEmail",
+            message: "What is your manager's Email?"
+        },{
+            type: "input",
+            name: "managerOfficeNumber",
+            message: "What is your manager's office number?"
+        }
+    ]).then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+        teamMembers.push(manager);
+        createTeam();
+    });
+}
+
+function createTeam(){
+    inquirer.prompt([
+        {
+          type: "list",
+          name: "memberChoice",
+          message: "Which type of team member would you like to add?",
+          choices: [
+            "Engineer",
+            "Intern",
+            "I don't want to add any more team members"
+          ]
+        }
+      ]).then(userChoice => {
+        switch(userChoice.memberChoice) {
+        case "Engineer":
+          addEngineer();
+          break;
+        case "Intern":
+          addIntern();
+          break;
+        default:
+          buildTeam();
+        }
+      });
+}
+
+function addEngineer(){
+
+}
+
+function addIntern(){
+
+}
+
+function buildTeam(){
+    //this is where you want to use fs.writefile/sync
+}
+
+createManager();
