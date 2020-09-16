@@ -92,11 +92,57 @@ function createTeam(){
 }
 
 function addEngineer(){
-
+  console.log("Please enter your engineer's info");
+  inquirer.prompt([
+      {
+          type: "input",
+          name: "engineerName",
+          message: "What is your engineer's name?"
+      },{
+          type: "input",
+          name: "engineerID",
+          message: "What is your engineer's ID number?"
+      },{
+          type: "input",
+          name: "engineerEmail",
+          message: "What is your engineer's Email?"
+      },{
+          type: "input",
+          name: "engineerGithub",
+          message: "What is your engineer's Github account name?"
+      }
+  ]).then(answers => {
+      const engineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
+      teamMembers.push(engineer);
+      createTeam();
+  });
 }
 
 function addIntern(){
-
+  console.log("Please enter your intern's info");
+  inquirer.prompt([
+      {
+          type: "input",
+          name: "internName",
+          message: "What is your intern's name?"
+      },{
+          type: "input",
+          name: "internID",
+          message: "What is your intern's ID number?"
+      },{
+          type: "input",
+          name: "internEmail",
+          message: "What is your intern's Email?"
+      },{
+          type: "input",
+          name: "internSchool",
+          message: "What is your intern's school?"
+      }
+  ]).then(answers => {
+      const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool);
+      teamMembers.push(intern);
+      createTeam();
+  });
 }
 
 function buildTeam(){
