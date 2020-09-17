@@ -147,6 +147,10 @@ function addIntern(){
 
 function buildTeam(){
     //this is where you want to use fs.writefile/sync
+    if(!fs.existsSync(OUTPUT_DIR)){
+      fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMembers),'utf-8')
 }
 
 createManager();
