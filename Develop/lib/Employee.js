@@ -20,6 +20,3 @@ class Employee {
 }
 
 module.exports = Employee;
-
-const e = new Employee("Foo", 1, "test@gmail.com");
-console.log(e);
